@@ -69,7 +69,6 @@ export function uploadImage({ file }) {
   });
 }
 
-
 // Добавляет новый пост
 export function addPost({ description, imageUrl }) {
   return fetch(postsHost, {
