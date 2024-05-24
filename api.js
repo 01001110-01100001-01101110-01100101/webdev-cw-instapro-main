@@ -56,6 +56,7 @@ export function loginUser({ login, password }) {
   });
 }
 
+
 // Загружает картинку в облако, возвращает url загруженной картинки
 export function uploadImage({ file }) {
   const data = new FormData();
@@ -68,6 +69,7 @@ export function uploadImage({ file }) {
     return response.json();
   });
 }
+
 
 // Добавляет новый пост
 export function addPost({ description, imageUrl }) {
