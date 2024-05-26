@@ -72,9 +72,12 @@ export function uploadImage({ file }) {
 
 
 // Добавляет новый пост
-export function addPost({ description, imageUrl }) {
+export function addPost({ description, imageUrl, token }) {
   return fetch(postsHost, {
     method: "POST",
+    headers: {
+      Authorization: token,
+    },
     body: JSON.stringify({
       description,
       imageUrl,
