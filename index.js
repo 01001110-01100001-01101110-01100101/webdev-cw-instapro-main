@@ -1,4 +1,4 @@
-import { addPost, getPosts } from "./api.js";
+import { addPost, getPosts, getUserPosts } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -70,7 +70,7 @@ export const goToPage = (newPage, data) => {
      // TODO: реализовать получение постов юзера из API
      //  console.log("Открываю страницу пользователя: ", data.userId);
 
-      return getPosts({ token: getToken() })
+      return getUserPosts({ token: getToken() })
         .then((userPosts) => {
           page = USER_POSTS_PAGE;
           posts = userPosts;
@@ -133,8 +133,9 @@ const renderApp = () => {
 
   if (page === USER_POSTS_PAGE) {
     // TODO: реализовать страницу фотографию пользвателя
-    appEl.innerHTML = "Здесь будет страница фотографий пользователя";
-    return;
+    return renderUserPostsPageComponent({
+      appEl,
+    });
   }
 };
 
