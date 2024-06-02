@@ -10,7 +10,7 @@ export function renderUserPostsPageComponent({ appEl }) {
 
   // TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
   // можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-  
+
 const postsHtml = posts
  .map((post, index) => {
   //const date = format(new Date(comment.date), "dd.MM.yyyy hh:mm");
@@ -54,11 +54,11 @@ const postsHtml = posts
     element: document.querySelector(".header-container"),
   });
 
-  // for (let userEl of document.querySelectorAll(".post-header")) {
-  //   userEl.addEventListener("click", () => {
-  //     goToPage(USER_POSTS_PAGE, {
-  //       userId: userEl.dataset.userId,
-  //     });
-  //   });
-  // }
+  for (let userEl of document.querySelectorAll(".post-header")) {
+    userEl.addEventListener("click", () => {
+      goToPage(USER_POSTS_PAGE, {
+        userId: userEl.dataset.userId,
+      });
+    });
+  }
 }

@@ -26,16 +26,16 @@ export function getPosts({ token }) {
 
 // Возвращает посты отдельного пользователя
 // в консоли id = undefined ?
-export function getUserPosts() {
-  return fetch(baseHost + `/user-posts/${id}`, {
-   method: "GET",
-  })
-   .then((response) => {
-    return response.json();
-   })
-   .then((data) => {
-    return data.posts;
-   });
+export function getUserPosts(userId) {
+  return fetch(baseHost + `/user-posts/${userId}`, {
+    method: "GET",
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data.posts;
+    });
 }
 
 
