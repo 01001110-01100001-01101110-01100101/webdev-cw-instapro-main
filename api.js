@@ -105,3 +105,31 @@ export function addPost({ description, imageUrl, token }) {
     return response.json();
   });
 }
+
+export function addLike({ postId, token }) {
+  return fetch(`${postsHost}/${postId}/like`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+  }).then((response) => {
+    if (response.status === 401) {
+      throw new Error("Неверный токен");
+    }
+    return response.json();
+  });
+}
+
+export function deleteLike({ postId, token }) {
+  return fetch(`${postsHost}/${postId}/dislike`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+  }).then((response) => {
+    if (response.status === 401) {
+      throw new Error("Неверный токен");
+    }
+    return response.json();
+  });
+}
