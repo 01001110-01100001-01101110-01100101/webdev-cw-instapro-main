@@ -15,12 +15,16 @@ import {
   removeUserFromLocalStorage,
   saveUserToLocalStorage,
 } from "./helpers.js";
+import { renderUserPostsPageComponent } from "./components/user-posts-page-component.js";
 
 export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
+export const setPosts = (newPosts) => {
+  posts = newPosts
+}
 
-const getToken = () => {
+export const getToken = () => {
   const token = user ? `Bearer ${user.token}` : undefined;
   return token;
 };
@@ -70,7 +74,7 @@ export const goToPage = (newPage, data) => {
      // TODO: реализовать получение постов юзера из API
      //  console.log("Открываю страницу пользователя: ", data.userId);
 
-      return getUserPosts({ token: getToken() })
+      return getUserPosts({ userId: data.userId })
         .then((userPosts) => {
           page = USER_POSTS_PAGE;
           posts = userPosts;
@@ -91,7 +95,7 @@ export const goToPage = (newPage, data) => {
   throw new Error("страницы не существует");
 };
 
-const renderApp = () => {
+export const renderApp = () => {
   const appEl = document.getElementById("app");
   if (page === LOADING_PAGE) {
     return renderLoadingPageComponent({
@@ -119,8 +123,10 @@ const renderApp = () => {
       appEl,
       onAddPostClick({ description, imageUrl }) {
         // TODO: реализовать добавление поста в API 
-        addPost({ description, imageUrl, token: getToken() });
-        goToPage(POSTS_PAGE);
+        addPost({ description, imageUrl, token: getToken() }).then(() => {
+          goToPage(POSTS_PAGE);
+        });
+        
       },
     });
   }

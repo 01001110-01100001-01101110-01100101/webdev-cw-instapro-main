@@ -1,6 +1,6 @@
 // Замени на свой, чтобы получить независимый от других набор данных.
 // "боевая" версия инстапро лежит в ключе prod
-const personalKey = "prod";
+const personalKey = "akopyan";
 const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 
@@ -26,16 +26,16 @@ export function getPosts({ token }) {
 
 // Возвращает посты отдельного пользователя
 // в консоли id = undefined ?
-export function getUserPosts() {
-  return fetch(baseHost + `/user-posts/${id}`, {
-   method: "GET",
-  })
-   .then((response) => {
-    return response.json();
-   })
-   .then((data) => {
-    return data.posts;
-   });
+export function getUserPosts({ userId }) {
+  return fetch(postsHost + `/user-posts/${userId}`, {
+    method: "GET",
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data.posts;
+    });
 }
 
 
@@ -101,6 +101,34 @@ export function addPost({ description, imageUrl, token }) {
   }).then((response) => {
     if (response.status === 400) {
       throw new Error("Вы не выбрали фото или не ввели текст");
+    }
+    return response.json();
+  });
+}
+
+export function addLike({ postId, token }) {
+  return fetch(`${postsHost}/${postId}/like`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+  }).then((response) => {
+    if (response.status === 401) {
+      throw new Error("Неверный токен");
+    }
+    return response.json();
+  });
+}
+
+export function deleteLike({ postId, token }) {
+  return fetch(`${postsHost}/${postId}/dislike`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+  }).then((response) => {
+    if (response.status === 401) {
+      throw new Error("Неверный токен");
     }
     return response.json();
   });
