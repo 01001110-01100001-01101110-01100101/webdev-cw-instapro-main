@@ -40,9 +40,9 @@ const postsHtml = posts
   const appHtml = `
               <div class="page-container">
                 <div class="header-container"></div>
-                <div class="posts-user-header"> data-user-id="${post.user.id}">
-                        <img src="${post.user.imageUrl}" class="post-header__user-image">
-                        <p class="post-header__user-name">${post.user.name}</p> </div>
+                <div class="posts-user-header" data-user-id="${posts[0].user.id}">
+                        <img src="${posts[0].user.imageUrl}" class="post-header__user-image">
+                        <p class="post-header__user-name">${posts[0].user.name}</p> </div>
                 <ul class="posts">
                 ${postsHtml}  
                 </ul>
